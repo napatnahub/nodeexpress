@@ -40,7 +40,7 @@ app.put('/books/:id',(req,res)=>{
     const book = books.find(b =>b.id === parseInt(req.params.id));
     if(!book)res.status(404).send('Book not fond');
     book.title = req.body.title;
-    cook.author = req.body.author;
+    book.author = req.body.author;
     res.send(book);
 });
 app.delete('/books/:id',(req,res)=>{
