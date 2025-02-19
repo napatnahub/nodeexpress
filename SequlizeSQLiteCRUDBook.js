@@ -37,8 +37,7 @@ app.get('/books',(req,res)=>{
 });
 // route to get a book by id
 app.get('/books/:id', (req, res) => {
-    Book.findByPk(req.params.id)
-        .then(book => {
+    Book.findByPk(req.params.id) .then(book => {
             if (!book) {
                 res.status(404).send('Book not found');
             } else {
@@ -52,12 +51,11 @@ app.get('/books/:id', (req, res) => {
 
 
 app.post('/books', (req, res) => {
-    Book.create(req.body)
-        .then(book => {
+    Book.create(req.body).then(book => {
             res.send(book);
-        })
-        .catch(err => {
+        }).catch(err => {
             res.status(500).send(err);
+        
         });
 });
 
