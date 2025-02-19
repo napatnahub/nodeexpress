@@ -35,14 +35,32 @@ app.get('/books',(req,res)=>{
         res.status(500).send(err);
     });
 });
-
-app.post('/books',(req,res)=>{
-    Book.create(req.body).then(book=>{
-        res.send(book);
-    }).catch(err =>{
-        res.status(500).send(err);
-    });
+// route to get a book by id
+app.get('/books/:id', (req, res) => {
+    Book.findByPk(req.params.id)
+        .then(book => {
+            if (!book) {
+                res.status(404).send('Book not found');
+            } else {
+                res.json(book);
+            }
+        })
+        .catch(err => {
+            res.status(500).send(err);
+        });
 });
+
+
+app.post('/books', (req, res) => {
+    Book.create(req.body)
+        .then(book => {
+            res.send(book);
+        })
+        .catch(err => {
+            res.status(500).send(err);
+        });
+});
+
 
 app.put('/books/:id',(req,res)=>{
     Book.findByPk(req.params.id).then(book =>{
